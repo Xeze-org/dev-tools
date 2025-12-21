@@ -1,0 +1,54 @@
+version: '3.8'
+
+networks:
+  kafkanet:
+    driver: bridge
+
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    networks:
+      - kafkanet
+    ports:
+      # Port for external connections from the host machine
+      - "29092:29092"
+    environment:
+      # KRaft settings
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:9093'
+      KAFKA_NODE_ID: 1
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      
+      # --- THE NETWORKING FIX ---
+      # Listeners Configuration:
+      # - INTERNAL: For communication within the Docker network (container to container)
+      # - EXTERNAL: For communication from your host machine (e.g., your local apps)
+      # - CONTROLLER: For KRaft internal operations
+      KAFKA_LISTENERS: 'INTERNAL://kafka:9092,EXTERNAL://0.0.0.0:29092,CONTROLLER://kafka:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://kafka:9092,EXTERNAL://localhost:29092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
+      
+      # Other settings
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      CLUSTER_ID: 'ciV0524zTde439cTTn9eZA'
+
+  akhq:
+    image: tchiotludo/akhq:latest
+    container_name: akhq
+    networks:
+      - kafkanet
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-cluster:
+              properties:
+                # AKHQ will use the INTERNAL listener
+                bootstrap.servers: "kafka:9092"
