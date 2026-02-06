@@ -4,17 +4,17 @@
 
 Make infrastructure simple — fast, secure, and delightful.
 
-[Dev Portal](https://dev.xeayu.com/) • [Code Portal](https://code.xeayu.com/dev)
+[Dev Portal](https://dev.xeze.org/) • [Code Portal](https://code.xeze.org/dev)
 
 </div>
 
 ## Quick Actions
 
-- 🚀 Matrix (Synapse + LiveKit): https://dev.xeayu.com/project/matrix
-- 🛡️ WireGuard Install: https://dev.xeayu.com/project/wireguard-install
-- 🧭 OpenVPN Access Server: https://dev.xeayu.com/project/openvpn-access-server
-- 🖼️ Ente (E2EE Photos, zero‑knowledge): https://code.xeayu.com/dev/ente
-- ☁️ Agros (Private Cloud storage): https://code.xeayu.com/dev/agros
+- 🚀 Matrix (Synapse + LiveKit): https://dev.xeze.org/project/matrix
+- 🛡️ WireGuard Install: https://dev.xeze.org/project/wireguard-install
+- 🧭 OpenVPN Access Server: https://dev.xeze.org/project/openvpn-access-server
+- 🖼️ Ente (E2EE Photos, zero‑knowledge): https://code.xeze.org/dev/ente
+- ☁️ Agros (Private Cloud storage): https://code.xeze.org/dev/agros
 
 
 
