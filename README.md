@@ -1,6 +1,6 @@
 <div align="center">
 
-# Xeayu Dev‑Tools
+# Xeze Dev‑Tools
 
 Make infrastructure simple — fast, secure, and delightful.
 
